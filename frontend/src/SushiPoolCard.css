@@ -1,0 +1,47 @@
+.sushi-card {
+    width: 520px;
+    background: linear-gradient(104deg, #1a1a1a 10.54%, #333333 89.46%);
+    border-radius: 20px;
+    box-shadow: 10px 10px 85px -4px rgba(0, 0, 0, 0.62);
+    padding: 20px;
+    margin-top: 20px;
+    color: #fff;
+  }
+  
+  .sushi-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .sushi-icon-text {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sushi-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  
+  .sushi-manage-text {
+    color: #FF007A;
+    cursor: pointer;
+  }
+  
+  .sushi-pool-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .sushi-label {
+    color: #888;
+  }
+  
+  .sushi-value {
+    font-weight: bold;
+  }
+  

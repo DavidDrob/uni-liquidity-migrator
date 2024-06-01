@@ -1,0 +1,89 @@
+body {
+    background: linear-gradient(104deg, #FEE6EF 10.54%, #FAFAFA 89.46%);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 90%; /* Increased width */
+    max-width: 800px; /* Increased maximum width */
+    margin: 0 auto; /* Center the container */
+  }
+  
+  .uniswap-logo {
+    width: 100px; /* Increased size */
+    height: 100px; /* Increased size */
+    border-radius: 50px; /* Adjusted border radius */
+    margin-bottom: 30px; /* Increased margin */
+  }
+  
+  .heading {
+    font-size: 32px; /* Increased font size */
+    font-weight: bold;
+    margin-bottom: 30px; /* Increased margin */
+  }
+  
+  .btn-uniswap {
+    background-color: #ff007a;
+    color: white;
+    border: none;
+    border-radius: 18px; /* Increased border radius */
+    padding: 18px 32px; /* Increased padding */
+    cursor: pointer;
+    font-size: 20px; /* Increased font size */
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px; /* Increased margin */
+  }
+  
+  .btn-uniswap:hover {
+    background-color: #e6006e;
+  }
+  
+  .text-large {
+    font-size: 20px; /* Larger font size for text */
+  }
+  
+  .card {
+    width: 520px;
+    background: linear-gradient(104deg, #FEE6EF 10.54%, #FAFAFA 89.46%);
+    border-radius: 70px; /* Ensures the border-radius is applied */
+    box-shadow: 10px 10px 85px -4px rgba(171, 154, 171, 0.62);
+    padding: 20px;
+    margin-top: 20px;
+    overflow: hidden; /* Ensures child elements do not overflow the parent */
+  }
+  
+  .sushi-card {
+    width: 520px;
+    background: linear-gradient(104deg, #1a1a1a 10.54%, #333333 89.46%);
+    border-radius: 20px;
+    box-shadow: 10px 10px 85px -4px rgba(0, 0, 0, 0.62);
+    padding: 20px;
+    margin-top: 20px;
+    color: #fff;
+  }
+  
+  .arrow-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .arrow {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #ff007a;
+  }
+  

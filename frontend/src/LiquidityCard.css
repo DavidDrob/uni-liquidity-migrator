@@ -1,0 +1,65 @@
+.card {
+    width: 520px;
+    background: linear-gradient(104deg, #FEE6EF 10.54%, #FAFAFA 89.46%);
+    border-radius: 70px; /* Ensures the border-radius is applied */
+    box-shadow: 10px 10px 85px -4px rgba(171, 154, 171, 0.62);
+    padding: 20px;
+    margin-top: 20px;
+    overflow: hidden; /* Ensures child elements do not overflow the parent */
+  }
+  
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .icon-text {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  
+  .manage-text {
+    color: #FF007A;
+    cursor: pointer;
+  }
+  
+  .pool-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .label {
+    color: #888;
+  }
+  
+  .value {
+    font-weight: bold;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .migrate-button {
+    background-color: #ff007a;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 24px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
