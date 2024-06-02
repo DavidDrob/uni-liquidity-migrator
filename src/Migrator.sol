@@ -4,12 +4,16 @@ pragma solidity ^0.8.20;
 import "./interfaces/IUniswapV2Router02.sol";
 import "./interfaces/IUniswapV2Pair.sol";
 
+import "forge-std/console.sol";
+
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 import {CurrencyLibrary, Currency} from "v4-core/src/types/Currency.sol";
 import {IHooks} from "v4-core/src/interfaces/IHooks.sol";
 import {IERC20} from "forge-std/interfaces/IERC20.sol";
 import {PoolModifyLiquidityTest} from "v4-core/src/test/PoolModifyLiquidityTest.sol";
 import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
+import {TickMath} from "v4-core/src/libraries/TickMath.sol";
+import {LiquidityAmounts} from "v4-periphery/libraries/LiquidityAmounts.sol";
 import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 
 contract Migrator {
@@ -53,8 +57,20 @@ contract Migrator {
         bytes32 idBytes = PoolId.unwrap(id);
         // console.logBytes32(bytes32(idBytes));
 
-        // Provide 10_000e18 worth of liquidity on the range of [-600, 600]
-        lpRouter.modifyLiquidity(pool, IPoolManager.ModifyLiquidityParams(-600, 600, 10_000e18, 0), hookData);
+        console.log(amountA);
+        console.log(amountB);
+        console.log(IERC20(token0).balanceOf(address(this)));
+
+        // TODO: figure out why this reverts
+        uint128 liquidity = LiquidityAmounts.getLiquidityForAmounts(
+            (3800 * 2**96),
+            (3800 * 2**96),
+            (3800 * 2**96),
+            amountA,
+            amountB
+        );
+
+        lpRouter.modifyLiquidity(pool, IPoolManager.ModifyLiquidityParams(TickMath.MIN_TICK, TickMath.MAX_TICK, int256(uint256(liquidity)), 0), hookData);
 
     }
 
