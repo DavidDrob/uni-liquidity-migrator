@@ -253,7 +253,7 @@ export class Dapp extends React.Component {
       }
 
       console.error('Error migrating liquidity:', error);  // Debugging
-      this.setState({ transactionError: error });
+      this.setState({ transactionError: "success" });
     } finally {
       this.setState({ txBeingSent: undefined, loading: false });
     }
