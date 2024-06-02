@@ -51,11 +51,69 @@ export class Dapp extends React.Component {
     this.state = this.initialState;
   }
 
+  // render() {
+  //   if (window.ethereum === undefined) {
+  //     return <NoWalletDetected />;
+  //   }
+
+  //   if (!this.state.selectedAddress) {
+  //     return (
+  //       <ConnectWallet 
+  //         connectWallet={() => this._connectWallet()} 
+  //         networkError={this.state.networkError}
+  //         dismiss={() => this._dismissNetworkError()}
+  //       />
+  //     );
+  //   }
+
+  //   return (
+  //     <div className="container p-4" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
+  //       <div style={{ textAlign: 'center' }}>
+  //         <div>
+  //           <img 
+  //             style={{
+  //               width: "70px",
+  //               height: '70px',
+  //               borderRadius: '40px',
+  //             }} 
+  //             src="https://cryptologos.cc/logos/uniswap-uni-logo.png" 
+  //             alt="Uniswap Logo"
+  //           />
+  //         </div>
+  //         <h1>Uniswap Liquidity Migrator</h1>
+  //         <hr/>
+  //         <button onClick={() => this._approveTokens()}>Approve</button>
+  //         <SushiPoolCard />
+  //         <Arrow />
+         
+  //         <LiquidityCard
+  //           loading={this.state.loading}
+  //           onMigrate={() => this._migrateLiquidity()}
+  //         />
+  //         {this.state.txBeingSent && (
+  //           <WaitingForTransactionMessage txHash={this.state.txBeingSent} />
+  //         )}
+  //         {this.state.transactionError && (
+  //           <TransactionErrorMessage
+  //             message={this._getRpcErrorMessage(this.state.transactionError)}
+  //             dismiss={() => this._dismissTransactionError()}
+  //           />
+  //         )}
+  //         {this.state.successMessage && (
+  //           <div style={{ marginTop: '20px', color: 'green', fontWeight: 'bold' }}>
+  //             {this.state.successMessage}
+  //           </div>
+  //         )}
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
   render() {
     if (window.ethereum === undefined) {
       return <NoWalletDetected />;
     }
-
+  
     if (!this.state.selectedAddress) {
       return (
         <ConnectWallet 
@@ -65,7 +123,7 @@ export class Dapp extends React.Component {
         />
       );
     }
-
+  
     return (
       <div className="container p-4" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
         <div style={{ textAlign: 'center' }}>
@@ -82,8 +140,10 @@ export class Dapp extends React.Component {
           </div>
           <h1>Uniswap Liquidity Migrator</h1>
           <hr/>
-          <button onClick={() => this._approveTokens()}>Approve</button>
-          <SushiPoolCard />
+          
+          <SushiPoolCard onApprove={() => this._approveTokens()} /> {/* Pass the onApprove prop */}
+
+         
           <Arrow />
          
           <LiquidityCard
@@ -108,6 +168,7 @@ export class Dapp extends React.Component {
       </div>
     );
   }
+  
 
   async _connectWallet() {
     try {
@@ -228,36 +289,67 @@ export class Dapp extends React.Component {
     }
   }
 
+  // async _migrateLiquidity() {
+  //   try {
+  //     this._dismissTransactionError();
+  //     this.setState({ loading: true, successMessage: '' });
+
+  //     const poolAddress = '0x397FF1542f962076d0BFE58eA045FfA2d347ACa0';
+  //     const liquidity = '1'; // or appropriate liquidity value
+
+  //     // debugger
+  //     const tx = await this._migrateContract.write.migrate([poolAddress, liquidity]);
+  //     this.setState({ txBeingSent: tx.hash });
+
+  //     const receipt = await tx.wait();
+
+  //     if (receipt.status === 0) {
+  //       throw new Error("Transaction failed");
+  //     }
+
+  //     this.setState({ successMessage: 'Liquidity migrated successfully' });
+  //   } catch (error) {
+  //     if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+  //       return;
+  //     }
+
+  //     console.error('Error migrating liquidity:', error);  // Debugging
+  //     this.setState({ transactionError: "success" });
+  //   } finally {
+  //     this.setState({ txBeingSent: undefined, loading: false });
+  //   }
+  // }
+
   async _migrateLiquidity() {
     try {
       this._dismissTransactionError();
       this.setState({ loading: true, successMessage: '' });
-
+  
       const poolAddress = '0x397FF1542f962076d0BFE58eA045FfA2d347ACa0';
       const liquidity = '1'; // or appropriate liquidity value
-
-      // debugger
+  
       const tx = await this._migrateContract.write.migrate([poolAddress, liquidity]);
-      this.setState({ txBeingSent: tx.hash });
-
+      this.setState({ txBeingSent: tx.hash, successMessage: 'Success, position migrated to Uniswap V2' });
+  
       const receipt = await tx.wait();
-
+  
       if (receipt.status === 0) {
         throw new Error("Transaction failed");
       }
-
+  
       this.setState({ successMessage: 'Liquidity migrated successfully' });
     } catch (error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
         return;
       }
-
+  
       console.error('Error migrating liquidity:', error);  // Debugging
-      this.setState({ transactionError: "success" });
+      this.setState({ transactionError: error });
     } finally {
       this.setState({ txBeingSent: undefined, loading: false });
     }
   }
+  
 
   _dismissTransactionError() {
     this.setState({ transactionError: undefined });
